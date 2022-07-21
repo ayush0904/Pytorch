@@ -19,4 +19,18 @@ a.add_(1)
 print(a)
 print(b)
 
+#
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+    x = torch.ones(5,device=device)
+    y = torch.ones(5)
+    y = y.to(device)
+    #This will run on Cuda
+    z = x + y
+    # z.numpy() This line will throw error as numpy can only handle CPU Tensor
+    z = z.to("cpu") # move back to cpu 
 
+x = torch.ones(5,requires_grad=True) # by default it is False
+# Whenever you have a variable you need to optimize later, then you need gradient
+# so put requires_grad=True
+print(x)
